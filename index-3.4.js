@@ -1,9 +1,6 @@
 const http = require('http')
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser')
-
-app.use(bodyParser.json())
 
 let persons = 
    [
@@ -94,23 +91,6 @@ app.delete('/api/persons/:id', (request, response) => {
   }
   else {
 	  response.status(404).end(result)
-  }
-  
-})
-
-app.post('/api/persons', (request, response) => {
-
-  const note = request.body
-  const id = Math.floor(Math.random() * 9007199254740990);
-  if (note) {
-	note.id = id
-	console.log(note)
-	persons.push(note)
-	console.log(persons)
-	response.sendStatus(204)
-  }
-  else {
-	  response.status(404).end()
   }
   
 })
