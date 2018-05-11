@@ -45,20 +45,19 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
 
-app.get('/api/persons', (req, res) => {
+app.get('/notes', (req, res) => {
 	console.log(req)
 	res.json(persons)
 })
 
-app.get('/api/persons/:id', (request, response) => {
+app.get('/notes/:id', (request, response) => {
   const id = Number(request.params.id)
   console.log(id)
   console.log(persons)
   const person = persons.find(person => person.id === id )
   console.log(person)
   if (person) {
-	  let result = `<h1>Henkilö</h1><p>${person.name}</p><p>${person.puh}</p>`
-	  response.send(result)
+	  response.json(person)
   }
   else {
 	  response.status(404).end()
