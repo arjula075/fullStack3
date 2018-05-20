@@ -4,13 +4,16 @@ var morgan = require('morgan')
 
 const app = express()
 const bodyParser = require('body-parser')
+const cors = require('cors')
+
+app.use(cors())
 
 app.use(bodyParser.json())
 
 morgan.token('payload', function (req, res) { return JSON.stringify(req.body) })
 app.use(morgan(':method :url :payload :status :response-time ms'))
 
-let persons = 
+let persons =
    [
     {
       "name": "Arto Hellas",
@@ -68,7 +71,7 @@ app.get('/api/persons/:id', (request, response) => {
   else {
 	  response.status(404).end()
   }
-  
+
 })
 
 app.get('/info', (request, response) => {
@@ -81,7 +84,7 @@ app.get('/info', (request, response) => {
   else {
 	  response.status(404).end(result)
   }
-  
+
 })
 
 app.delete('/api/persons/:id', (request, response) => {
@@ -97,8 +100,29 @@ app.delete('/api/persons/:id', (request, response) => {
   else {
 	  response.status(404).end(result)
   }
-  
+
 })
+
+app.put('/api/persons/:id', (request, response) => {
+
+  const updatedPerson = request.body
+  const id = Number(request.params.id)
+  const person = persons.find(person => person.id === id )
+  if (person) {
+	    let index = persons.indexOf(person)
+	    let pivotPerson = persons.splice(index, 1)
+	    console.log(pivotPerson)
+      pivotPerson.name = updatedPerson.name
+      pivotPerson.puh = updatedPerson.puh
+      persons.push(pivotPerson)
+	    response.sendStatus(204)
+  }
+  else {
+	  response.status(404).end(result)
+  }
+
+})
+
 
 app.post('/api/persons', (request, response) => {
 
@@ -112,26 +136,26 @@ app.post('/api/persons', (request, response) => {
 	  }
 	  else if (!note.puh) {
 		 //console.log('note has no puh', note)
-		 return response.status(400).json({error: 'puh missing'}) 
-		 
-	  }	  
+		 return response.status(400).json({error: 'puh missing'})
+
+	  }
 	  else if (searchArray.indexOf(note.name) > 0) {
 			//console.log('SAME exists', note)
 			return response.status(400).json({error: 'person already exists'})
 	  }
 	  else {
-		  	//console.log('ok to add', note)		
+		  	//console.log('ok to add', note)
 			note.id = id
 			persons.push(note)
 			console.log(persons)
-			return response.sendStatus(200)	
+      return response.json(note)
 		}
   }
   else {
 	  return response.status(400).json({error: 'content missing'})
-	  
+
   }
-  
+
 })
 
 
