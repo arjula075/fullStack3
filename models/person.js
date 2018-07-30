@@ -25,7 +25,8 @@ initiateConnection()
 
 const personSchema = new mongoose.Schema({
   name: String,
-  puh: String
+  puh: String,
+  id: Number
 })
 
  personSchema.statics.format = function(person) {
