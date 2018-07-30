@@ -3,14 +3,14 @@ const mongoose = require('mongoose')
 const initiateConnection = () => {
 	try {
 		// get the password
-		console.log('getting password')
-		let psw = ''
-		fs = require('fs');
-		fs.readFile('password.txt', 'utf8', function (err,data) {
-			console.log('password getting',err, data)
-			if (err) {
-				return console.log(err);
-			}
+		//console.log('getting password')
+		//let psw = ''
+		//fs = require('fs');
+		//fs.readFile('password.txt', 'utf8', function (err,data) {
+		//	console.log('password getting',err, data)
+		//	if (err) {
+		//		return console.log(err);
+		//	}
 		
 		if ( process.env.NODE_ENV !== 'production' ) {
 			require('dotenv').config()
