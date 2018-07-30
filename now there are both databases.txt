@@ -1,0 +1,1 @@
+test and production, although I could have tried to find out how to create local environment variables
