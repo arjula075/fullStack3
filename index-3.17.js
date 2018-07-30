@@ -35,7 +35,7 @@ app.get('/api/persons/:id', (request, response) => {
 
 app.get('/info', (request, response) => {
 
-  persons = getPersons()
+  persons = getPersons())
   if (persons) {
 	  let numberOfNames = persons.length
 	  let result = `<h1>Info!</h1><p>luettelossa nimiä ${numberOfNames}</p><p>${new Date()}</p>`
