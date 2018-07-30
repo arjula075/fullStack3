@@ -21,7 +21,7 @@ const initiateConnection = () => {
 		//const url = `mongodb://admin:${data}@ds229790.mlab.com:29790/full_stack_test`
 		console.log(url)
 		mongoose.connect(url)
-		})
+		}
 	}
 	catch (e) {
 		console.log(e)
