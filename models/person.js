@@ -11,7 +11,13 @@ const initiateConnection = () => {
 			if (err) {
 				return console.log(err);
 			}
-		const url = `mongodb://admin:${data}@ds229790.mlab.com:29790/full_stack_test`
+		
+		if ( process.env.NODE_ENV !== 'production' ) {
+			require('dotenv').config()
+		}
+
+		const url = process.env.MONGODB_URI
+		//const url = `mongodb://admin:${data}@ds229790.mlab.com:29790/full_stack_test`
 		console.log(url)
 		mongoose.connect(url)
 		})
